@@ -9,6 +9,7 @@ Showcase geoespacial 2D orientado a explicar la idea, arquitectura y experiencia
 ![MapLibre](https://img.shields.io/badge/MapLibre-396CB2?style=flat)
 ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=flat&logo=javascript&logoColor=F7DF1E)
 ![GIS](https://img.shields.io/badge/GIS-geoespacial-4C8C2B?style=flat)
+[![Pages](https://github.com/truquinio/sig-castelldefels-pro/actions/workflows/pages.yml/badge.svg)](https://github.com/truquinio/sig-castelldefels-pro/actions/workflows/pages.yml)
 
 [**Demo pública**](https://truquinio.github.io/sig-castelldefels-pro/) ·
 [**Arquitectura**](docs/ARCHITECTURE.md) ·
@@ -104,6 +105,12 @@ Los datos de la demo son exclusivamente de demostración o proceden de fuentes p
 
 **Portfolio / Showcase Edition.**  
 El desarrollo completo continúa de forma privada.
+
+## 🔏 Uso y reutilización
+
+Este repositorio público funciona como showcase técnico. **No concede una licencia open source de reutilización del código**.
+
+Las fuentes cartográficas y los datos de terceros mantienen sus propias licencias y condiciones.
 
 ---
 
