@@ -108,4 +108,4 @@ El desarrollo completo continúa de forma privada.
 ---
 
 © 2026 Federico Trucco. All rights reserved.  
-**by [truquinio](https://github.com/trauquinio)** · [LinkedIn](https://www.linkedin.com/in/federico-trucco/)
+**by [truquinio](https://github.com/truquinio)** · [LinkedIn](https://www.linkedin.com/in/federico-trucco/)
