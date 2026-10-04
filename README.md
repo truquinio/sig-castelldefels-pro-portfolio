@@ -1,125 +1,133 @@
 <div align="center">
 
-# 🏙️ SIG Castelldefels · Digital Twin
+# 🏙️ SIG Castelldefels · Urban Digital Twin
 
-### Public Portfolio Edition
+### Public Portfolio Edition · GIS 2D/3D · parcelario · planeamiento · ciudad en vivo
 
-Showcase geoespacial 2D orientado a explicar la idea, arquitectura y experiencia visual de un prototipo de gemelo digital urbano.
+Showcase público de un prototipo privado orientado a análisis territorial, trazabilidad urbanística y visualización urbana.
 
 ![MapLibre](https://img.shields.io/badge/MapLibre-396CB2?style=flat-square)
-![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=flat-square)
-![GIS](https://img.shields.io/badge/GIS-geoespacial-4C8C2B?style=flat-square)
+![Cesium](https://img.shields.io/badge/Cesium-3D-6CADDF?style=flat-square)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=flat-square)
+![PostGIS](https://img.shields.io/badge/PostGIS-Spatial-4169E1?style=flat-square)
 [![Pages](https://github.com/truquinio/sig-castelldefels-pro-portfolio/actions/workflows/pages.yml/badge.svg)](https://github.com/truquinio/sig-castelldefels-pro-portfolio/actions/workflows/pages.yml)
 
-[**Demo pública**](https://truquinio.github.io/sig-castelldefels-pro-portfolio/) ·
+[**Abrir showcase**](https://truquinio.github.io/sig-castelldefels-pro-portfolio/) ·
 [**Arquitectura**](docs/ARCHITECTURE.md) ·
-[**Alcance**](SHOWCASE_SCOPE.md)
+[**Alcance público**](SHOWCASE_SCOPE.md)
 
 </div>
 
 ---
 
 > [!IMPORTANT]
-> Este repositorio es una **edición pública de portfolio**. La implementación completa, integraciones avanzadas, automatizaciones, agentes, reglas internas y tooling de datos permanecen en un repositorio privado.
+> Este repositorio es una **edición pública de portfolio**. Explica el producto, su arquitectura y su experiencia visual sin publicar el núcleo privado, reglas internas, automatizaciones ni datasets de trabajo. No es un sistema oficial del Ayuntamiento de Castelldefels ni una fuente normativa.
 
-## 🎯 Caso de uso
+## 🎯 Qué resuelve el proyecto
 
-Explorar una parcela y su contexto urbano para entender cómo un visor puede combinar capas, procedencia de datos y escenarios. La demo pública permite revisar el lenguaje cartográfico; la API FastAPI, PostGIS y la escena Cesium del desarrollo privado no se ejecutan en esta edición.
+El proyecto explora una plataforma municipal 2D/3D donde una parcela, su planeamiento y su contexto territorial puedan consultarse con procedencia explícita.
 
-## 🌍 Qué muestra
+El flujo de trabajo del desarrollo privado se organiza alrededor de:
 
-El proyecto explora cómo combinar cartografía web, datos geoespaciales y análisis urbano en una interfaz única.
+> **localizar → consultar → contrastar fuentes → analizar → simular → explicar evidencia**
 
-La edición pública conserva:
+La demo de este repositorio es deliberadamente más pequeña: permite evaluar el lenguaje cartográfico y la dirección de producto sin fingir que el backend privado está ejecutándose en GitHub Pages.
 
-- experiencia cartográfica;
-- ejemplo 2D con MapLibre;
-- datos ficticios/públicos de demostración;
-- arquitectura conceptual;
-- descripción de las fuentes y capas trabajadas;
-- límites entre showcase y núcleo privado.
+## 🧭 Tres superficies del producto
 
-## ▶️ Ejecutar el showcase
+| Superficie | Objetivo |
+| --- | --- |
+| **Territorio** | Consulta rápida de capas, Catastro, planeamiento, riesgos y contexto abierto |
+| **Urbanismo 3D** | Parcela, volumetría y escenarios con procedencia y supuestos visibles |
+| **Ciudad en vivo / God's Eye** | Contexto operativo 3D para fuentes temporales y simulaciones claramente etiquetadas |
 
-```bash
+## ✨ Capacidades del desarrollo privado
+
+- API **FastAPI** con contratos para salud, parcelas, planeamiento, edificabilidad y escenarios;
+- **PostgreSQL/PostGIS** para geometría, metadatos y reglas versionadas;
+- **MapLibre GL JS** para interacción territorial y urbana rápida;
+- **CesiumJS** para la escena 3D profunda;
+- Catastro INSPIRE, ICGC y MUC como fuentes oficiales o de referencia según el caso;
+- OpenStreetMap y Overture como contexto abierto;
+- Overture Buildings/PMTiles para contexto construido escalable;
+- capas de riesgo ACA y fuentes operativas como ADS-B, AMB GTFS-Realtime, SCT, ICAEN y redes ambientales cuando están disponibles;
+- PWA, fallback offline del shell y separación entre datos actuales, derivados, estimados, escenarios y simulaciones;
+- herramientas deterministas de análisis que pueden ser orquestadas por un modelo sin convertir al modelo en fuente de normativa ni geometría.
+
+> [!NOTE]
+> La disponibilidad de una fuente externa no implica que todos sus datos sean “live”. El proyecto distingue observación, estimación, escenario y simulación en lugar de presentarlos como equivalentes.
+
+## ▶️ Showcase público
+
+[**Abrir demo**](https://truquinio.github.io/sig-castelldefels-pro-portfolio/)
+
+La edición pública usa HTML, CSS, JavaScript y MapLibre con geometrías de demostración. No necesita el backend privado.
+
+Para servirla localmente:
+
+~~~bash
 python -m http.server 8000
-```
+~~~
 
-Abre `http://localhost:8000/`. El mapa requiere conexión a sus recursos externos; no necesita el backend privado.
+Abre `http://localhost:8000/`.
 
-## 🧭 Demo pública
+## 🏗️ Arquitectura
 
-La demo del repo está construida específicamente para portfolio. Utiliza un mapa base público y geometrías simples de ejemplo.
+~~~mermaid
+flowchart LR
+    O["Fuentes oficiales / abiertas"] --> A["Adaptadores y normalización"]
+    A --> API["FastAPI"]
+    API --> DB[("PostgreSQL / PostGIS")]
+    API --> M["MapLibre · Territorio"]
+    API --> C["Cesium · 3D / God's Eye"]
+    M --> UX["Consulta y evidencia"]
+    C --> UX
+    S["Escenarios"] --> API
+~~~
 
-No contiene:
+La arquitectura pública documenta las capas y responsabilidades; la implementación completa permanece privada.
 
-- proxy local real;
-- lógica normativa;
-- consultas completas a Catastro;
-- automatizaciones Overture;
-- agente geoespacial original;
-- integración Ollama;
-- motor de análisis privado;
-- datasets internos.
+📘 [Ver arquitectura pública](docs/ARCHITECTURE.md)
 
-## 🧩 Conceptos del proyecto completo
+## 🔎 Procedencia y semántica
 
-- MapLibre en 2D/3D;
-- OpenStreetMap / OpenFreeMap;
-- ortofoto ICGC;
-- Catastro INSPIRE / OVC;
-- planeamiento MUC;
-- clustering y normalización de actividades;
-- análisis por parcela;
-- volumen 3D conceptual;
-- exportación estructurada;
-- agente geoespacial;
-- integración opcional con modelos locales.
+El proyecto evita mezclar categorías de evidencia:
 
-## 🏗️ Arquitectura y alcance
+- **official** — fuente oficial;
+- **open** — fuente abierta;
+- **derived / estimate** — cálculo o inferencia;
+- **scenario** — hipótesis introducida o calculada para comparar alternativas;
+- **synthetic / simulation** — representación generada para visualización o prueba;
+- **unknown** — evidencia insuficiente.
 
-La demo pública usa HTML, CSS, JavaScript y MapLibre con geometrías de ejemplo. La normalización, los adaptadores, el análisis parcelario y las integraciones operativas pertenecen al desarrollo privado.
+Una visualización 3D o un escenario **no sustituyen** una licencia, un certificado, Catastro ni una determinación urbanística oficial.
 
-| Superficie | Implementación |
+## 📦 Público vs. privado
+
+| Edición pública | Desarrollo privado |
 | --- | --- |
-| Demo pública | Visor 2D MapLibre y geometrías de demostración |
-| Desarrollo privado | API FastAPI, PostGIS, análisis parcelario y escena Cesium |
-| Documentación | Arquitectura conceptual y límites de cada edición |
+| showcase MapLibre | API FastAPI |
+| geometrías de demostración | PostGIS y contratos de datos |
+| arquitectura de alto nivel | análisis parcelario |
+| documentación de procedencia | reglas versionadas y escenarios |
+| experiencia visual | MapLibre + Cesium |
+| sin datos internos | integraciones y tooling de ingesta |
 
-📘 [Ver arquitectura](docs/ARCHITECTURE.md)
+## 🧩 Stack
 
-## 🧪 Qué demuestra técnicamente
-
-**Frontend cartográfico:** MapLibre GL JS · HTML · CSS · JavaScript  
-**Demo:** mapa base externo y geometrías de ejemplo  
-**Integraciones descritas del desarrollo privado:** GeoJSON · servicios OGC · fuentes geoespaciales públicas  
-**Conceptos:** capas, parcelario, planeamiento, análisis espacial, 2D/3D, agentes
-
-## 📦 Portfolio vs. Core
-
-| Público | Privado |
-| --- | --- |
-| README y documentación | motor completo |
-| demo simplificada | integraciones reales |
-| arquitectura conceptual | reglas avanzadas |
-| datos de ejemplo | tooling de ingesta |
-| UI cartográfica | agentes / automatización |
-| casos de uso | lógica comercial |
-
-## ⚖️ Alcance
-
-No es un sistema oficial del Ayuntamiento de Castelldefels ni una fuente normativa.
-
-Los datos de la demo son exclusivamente de demostración o proceden de fuentes públicas.
+**GIS / 3D:** MapLibre GL JS · CesiumJS · GeoJSON · PMTiles  
+**Backend privado:** Python · FastAPI  
+**Datos:** PostgreSQL/PostGIS · OGC/INSPIRE · servicios públicos  
+**Frontend público:** HTML · CSS · JavaScript  
+**Principios:** provenance-first · mobile/responsive · accesibilidad · PWA
 
 ## 📌 Estado
 
-**Portfolio / Showcase Edition.**  
-El desarrollo completo continúa de forma privada.
+**Portfolio / Showcase Edition.** El desarrollo principal continúa en privado y evoluciona como prototipo técnico, no como sistema municipal oficial.
 
 ## 🔏 Uso y reutilización
 
-Este repositorio público funciona como showcase técnico. **No concede una licencia open source de reutilización del código**.
+Este repositorio público funciona como showcase técnico. **No concede actualmente una licencia open source de reutilización del código**.
 
 Las fuentes cartográficas y los datos de terceros mantienen sus propias licencias y condiciones.
 
