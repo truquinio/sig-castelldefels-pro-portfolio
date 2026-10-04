@@ -6,12 +6,12 @@
 
 Showcase geoespacial 2D orientado a explicar la idea, arquitectura y experiencia visual de un prototipo de gemelo digital urbano.
 
-![MapLibre](https://img.shields.io/badge/MapLibre-396CB2?style=flat)
-![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=flat&logo=javascript&logoColor=F7DF1E)
-![GIS](https://img.shields.io/badge/GIS-geoespacial-4C8C2B?style=flat)
-[![Pages](https://github.com/truquinio/sig-castelldefels-pro/actions/workflows/pages.yml/badge.svg)](https://github.com/truquinio/sig-castelldefels-pro/actions/workflows/pages.yml)
+![MapLibre](https://img.shields.io/badge/MapLibre-396CB2?style=flat-square)
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=flat-square)
+![GIS](https://img.shields.io/badge/GIS-geoespacial-4C8C2B?style=flat-square)
+[![Pages](https://github.com/truquinio/sig-castelldefels-pro-portfolio/actions/workflows/pages.yml/badge.svg)](https://github.com/truquinio/sig-castelldefels-pro-portfolio/actions/workflows/pages.yml)
 
-[**Demo pública**](https://truquinio.github.io/sig-castelldefels-pro/) ·
+[**Demo pública**](https://truquinio.github.io/sig-castelldefels-pro-portfolio/) ·
 [**Arquitectura**](docs/ARCHITECTURE.md) ·
 [**Alcance**](SHOWCASE_SCOPE.md)
 
@@ -34,6 +34,14 @@ La edición pública conserva:
 - arquitectura conceptual;
 - descripción de las fuentes y capas trabajadas;
 - límites entre showcase y núcleo privado.
+
+## ▶️ Ejecutar el showcase
+
+```bash
+python -m http.server 8000
+```
+
+Abre `http://localhost:8000/`. El mapa requiere conexión a sus recursos externos; no necesita el backend privado.
 
 ## 🧭 Demo pública
 
