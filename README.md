@@ -22,6 +22,10 @@ Showcase geoespacial 2D orientado a explicar la idea, arquitectura y experiencia
 > [!IMPORTANT]
 > Este repositorio es una **edición pública de portfolio**. La implementación completa, integraciones avanzadas, automatizaciones, agentes, reglas internas y tooling de datos permanecen en un repositorio privado.
 
+## 🎯 Caso de uso
+
+Explorar una parcela y su contexto urbano para entender cómo un visor puede combinar capas, procedencia de datos y escenarios. La demo pública permite revisar el lenguaje cartográfico; la API FastAPI, PostGIS y la escena Cesium del desarrollo privado no se ejecutan en esta edición.
+
 ## 🌍 Qué muestra
 
 El proyecto explora cómo combinar cartografía web, datos geoespaciales y análisis urbano en una interfaz única.
@@ -72,24 +76,23 @@ No contiene:
 - agente geoespacial;
 - integración opcional con modelos locales.
 
-## 🏗️ Arquitectura pública
+## 🏗️ Arquitectura y alcance
 
-~~~mermaid
-flowchart TD
-    SRC["Fuentes geoespaciales públicas"] --> N["Normalización"]
-    N --> MAP["Visor MapLibre"]
-    MAP --> L["Capas / geometrías"]
-    MAP --> A["Análisis"]
-    A --> UI["Interfaz urbana"]
-    CORE["Core privado"] -. implementación completa .-> A
-~~~
+La demo pública usa HTML, CSS, JavaScript y MapLibre con geometrías de ejemplo. La normalización, los adaptadores, el análisis parcelario y las integraciones operativas pertenecen al desarrollo privado.
+
+| Superficie | Implementación |
+| --- | --- |
+| Demo pública | Visor 2D MapLibre y geometrías de demostración |
+| Desarrollo privado | API FastAPI, PostGIS, análisis parcelario y escena Cesium |
+| Documentación | Arquitectura conceptual y límites de cada edición |
 
 📘 [Ver arquitectura](docs/ARCHITECTURE.md)
 
 ## 🧪 Qué demuestra técnicamente
 
 **Frontend cartográfico:** MapLibre GL JS · HTML · CSS · JavaScript  
-**Datos:** GeoJSON · servicios OGC · fuentes geoespaciales públicas  
+**Demo:** mapa base externo y geometrías de ejemplo  
+**Integraciones descritas del desarrollo privado:** GeoJSON · servicios OGC · fuentes geoespaciales públicas  
 **Conceptos:** capas, parcelario, planeamiento, análisis espacial, 2D/3D, agentes
 
 ## 📦 Portfolio vs. Core
