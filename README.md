@@ -2,9 +2,9 @@
 
 # 🏙️ SIG Castelldefels · Urban Digital Twin
 
-### Public Portfolio Edition · GIS 2D/3D · parcelario · planeamiento · ciudad en vivo
+### Territorio · Proyecto · Ciudad en vivo
 
-Showcase público de un prototipo privado orientado a análisis territorial, trazabilidad urbanística y visualización urbana.
+Showcase público de un prototipo privado de análisis territorial, proyecto parcelario y ciudad operativa 3D.
 
 ![MapLibre](https://img.shields.io/badge/MapLibre-396CB2?style=flat-square)
 ![Cesium](https://img.shields.io/badge/Cesium-3D-6CADDF?style=flat-square)
@@ -12,116 +12,137 @@ Showcase público de un prototipo privado orientado a análisis territorial, tra
 ![PostGIS](https://img.shields.io/badge/PostGIS-Spatial-4169E1?style=flat-square)
 [![Pages](https://github.com/truquinio/sig-castelldefels-pro-portfolio/actions/workflows/pages.yml/badge.svg)](https://github.com/truquinio/sig-castelldefels-pro-portfolio/actions/workflows/pages.yml)
 
-[**Abrir SIG en Render**](https://sig-castelldefels-twin.onrender.com/) ·
-[**Arquitectura**](docs/ARCHITECTURE.md) ·
-[**Alcance público**](SHOWCASE_SCOPE.md)
+[**Abrir SIG en Render**](https://sig-castelldefels-twin.onrender.com/) · [**Arquitectura**](docs/ARCHITECTURE.md) · [**Alcance público**](SHOWCASE_SCOPE.md)
+
+**by [Federico Trucco](https://github.com/truquinio)** · [LinkedIn](https://www.linkedin.com/in/federico-trucco/)
 
 </div>
 
 ---
 
 > [!IMPORTANT]
-> Este repositorio es una **edición pública de portfolio**. Explica el producto, su arquitectura y su experiencia visual sin publicar el núcleo privado, reglas internas, automatizaciones ni datasets de trabajo. No es un sistema oficial del Ayuntamiento de Castelldefels ni una fuente normativa.
+> Esta es la **edición pública de portfolio**. El SIG operativo se despliega desde un repositorio privado. Aquí se documentan producto, alcance y arquitectura sin publicar el núcleo del backend, reglas internas, automatizaciones ni datasets de trabajo. No es un sistema oficial del Ayuntamiento de Castelldefels ni una fuente normativa.
 
-## 🎯 Qué resuelve el proyecto
+## 🎯 Qué producto es
 
-El proyecto explora una plataforma municipal 2D/3D donde una parcela, su planeamiento y su contexto territorial puedan consultarse con procedencia explícita.
+El proyecto busca que una persona pueda pasar de **entender un lugar** a **estudiar una parcela** y, cuando existen reglas urbanísticas verificadas, **evaluar su capacidad edificatoria y una propuesta 3D** sin perder la procedencia del dato.
 
-El flujo de trabajo del desarrollo privado se organiza alrededor de:
+La navegación se reduce deliberadamente a tres mundos:
 
-> **localizar → consultar → contrastar fuentes → analizar → simular → explicar evidencia**
-
-La página pública dirige al SIG desplegado en Render. Este repositorio sólo documenta su alcance y arquitectura; el núcleo de código permanece privado.
-
-## 🧭 Tres superficies del producto
-
-| Superficie | Objetivo |
+| Superficie | Para qué sirve |
 | --- | --- |
-| **Territorio** | Consulta rápida de capas, Catastro, planeamiento, riesgos y contexto abierto |
-| **Urbanismo 3D** | Parcela, volumetría y escenarios con procedencia y supuestos visibles |
-| **Ciudad en vivo / God's Eye** | Contexto operativo 3D para fuentes temporales y simulaciones claramente etiquetadas |
+| **Territorio** | SIG de consulta: Catastro, planeamiento, riesgos, ortofoto y contexto |
+| **Proyecto** | Parcela → normativa/evidencia → edificabilidad/FAR → ocupación → altura → retranqueos → envolvente/maqueta 3D |
+| **Ciudad en vivo** | God’s Eye: movilidad, cámaras, incidencias, vuelos y simulaciones etiquetadas |
 
-## ✨ Capacidades del desarrollo privado
+La interfaz evita duplicar controles entre esos mundos: cada tarea aparece donde corresponde.
 
-- API **FastAPI** con contratos para salud, parcelas, planeamiento, edificabilidad y escenarios;
-- **PostgreSQL/PostGIS** para geometría, metadatos y reglas versionadas;
-- **MapLibre GL JS** para interacción territorial y urbana rápida;
-- **CesiumJS** para la escena 3D profunda;
-- Catastro INSPIRE, ICGC y MUC como fuentes oficiales o de referencia según el caso;
-- OpenStreetMap y Overture como contexto abierto;
-- Overture Buildings/PMTiles para contexto construido escalable;
-- capas de riesgo ACA y fuentes operativas como ADS-B, AMB GTFS-Realtime, SCT, ICAEN y redes ambientales cuando están disponibles;
-- PWA, fallback offline del shell y separación entre datos actuales, derivados, estimados, escenarios y simulaciones;
-- herramientas deterministas de análisis que pueden ser orquestadas por un modelo sin convertir al modelo en fuente de normativa ni geometría.
+## 🏗️ Flujo para arquitectos y construcción
 
-> [!NOTE]
-> La disponibilidad de una fuente externa no implica que todos sus datos sean “live”. El proyecto distingue observación, estimación, escenario y simulación en lugar de presentarlos como equivalentes.
+El núcleo de **Proyecto** está pensado para análisis previo de solares y parcelas:
 
-## ▶️ Abrir el SIG
+```text
+Seleccionar parcela
+→ Catastro
+→ planeamiento aplicable
+→ afectaciones
+→ parámetros urbanísticos verificados
+→ edificabilidad / FAR
+→ ocupación
+→ altura / plantas
+→ retranqueos
+→ capacidad resultante
+→ maqueta / escenario 3D
+→ evidencia e informe
+```
 
-[**SIG Castelldefels · Digital Twin en Render**](https://sig-castelldefels-twin.onrender.com/)
+Si un parámetro no está respaldado por una regla con documento, artículo y vigencia, permanece **sin verificar**. Los valores introducidos manualmente se muestran como **escenario/supuesto**, nunca como normativa.
 
-La portada de GitHub Pages redirige allí. La interfaz y los servicios pueden tardar en responder durante el arranque del plan gratuito; la propia aplicación muestra su estado. Este repositorio conserva la documentación pública sin replicar el código privado.
+## 🗺️ Territorio sin saturación
 
-## 🏗️ Arquitectura
+La superficie principal sigue un patrón map-first inspirado en la simplicidad del SIG público de actividades: acciones cartográficas cortas, panel lateral por tarea y sólo el contexto necesario.
 
-~~~mermaid
-flowchart LR
-    O["Fuentes oficiales / abiertas"] --> A["Adaptadores y normalización"]
-    A --> API["FastAPI"]
-    API --> DB[("PostgreSQL / PostGIS")]
-    API --> M["MapLibre · Territorio"]
-    API --> C["Cesium · 3D / God's Eye"]
-    M --> UX["Consulta y evidencia"]
-    C --> UX
-    S["Escenarios"] --> API
-~~~
+Incluye, entre otras funciones:
 
-La arquitectura pública documenta las capas y responsabilidades; la implementación completa permanece privada.
+- selección parcelaria y Catastro;
+- MUC / planeamiento como contexto territorial;
+- riesgos ACA y otras afectaciones verificables;
+- ortofoto ICGC;
+- **comparador histórico de ortofotos ICGC** con dos fechas y deslizador;
+- edificios/contexto Overture;
+- entorno abierto OSM sólo como contexto, no como censo municipal.
 
-📘 [Ver arquitectura pública](docs/ARCHITECTURE.md)
+## 🌐 Ciudad en vivo / God’s Eye
 
-## 🔎 Procedencia y semántica
+- aeronaves ADS-B con posición/altitud publicadas y representación 3D;
+- buses AMB estimados sobre geometría GTFS, sin presentarlos como GPS si la fuente no publica Vehicle Positions;
+- cámaras e incidencias SCT, distinguiendo catálogo, imagen vigente, última imagen válida e indisponibilidad;
+- tráfico sintético sólo cuando está rotulado como **simulación visual**;
+- iluminación solar y sombras;
+- edificios Overture con LoD contextual/procedencia visible.
 
-El proyecto evita mezclar categorías de evidencia:
+## 🔎 Procedencia antes que espectáculo
+
+El proyecto mantiene separados:
 
 - **official** — fuente oficial;
 - **open** — fuente abierta;
-- **derived / estimate** — cálculo o inferencia;
-- **scenario** — hipótesis introducida o calculada para comparar alternativas;
-- **synthetic / simulation** — representación generada para visualización o prueba;
+- **derived / estimate** — cálculo o estimación;
+- **scenario** — hipótesis para comparar alternativas;
+- **synthetic / simulation** — representación generada;
 - **unknown** — evidencia insuficiente.
 
-Una visualización 3D o un escenario **no sustituyen** una licencia, un certificado, Catastro ni una determinación urbanística oficial.
+Una escena 3D, una envolvente o un escenario **no sustituyen** licencia, certificado, Catastro ni informe urbanístico.
+
+## ✨ Stack y capacidades
+
+- **MapLibre GL JS** para SIG 2D/2.5D y consulta rápida;
+- **CesiumJS** para la escena 3D profunda;
+- **FastAPI** para contratos, fuentes y cálculo determinista;
+- **PostgreSQL/PostGIS** para geometría, metadatos y reglas versionadas;
+- Catastro INSPIRE, ICGC, MUC, ACA, SCT, ICAEN y otras fuentes públicas según disponibilidad;
+- OpenStreetMap y Overture como contexto abierto;
+- PMTiles / Overture Buildings para ciudad 3D escalable;
+- PWA y degradación explícita cuando una fuente externa no responde.
+
+## ▶️ Demo
+
+[**Abrir SIG Castelldefels · Digital Twin en Render**](https://sig-castelldefels-twin.onrender.com/)
+
+El frontend y el backend están separados para mantener la demo gratuita. En el plan free, el backend puede necesitar unos segundos para despertar; la interfaz propia sustituye la pantalla genérica de arranque.
+
+## 🏗️ Arquitectura
+
+```mermaid
+flowchart LR
+    O["Fuentes oficiales / abiertas"] --> A["Adaptadores + normalización"]
+    A --> API["FastAPI"]
+    API --> DB[("PostgreSQL / PostGIS")]
+    API --> T["Territorio · MapLibre"]
+    API --> P["Proyecto · parcela + reglas + 3D"]
+    API --> C["Ciudad en vivo · Cesium"]
+    T --> UX["Consulta + evidencia"]
+    P --> UX
+    C --> UX
+```
+
+📘 [Arquitectura pública](docs/ARCHITECTURE.md)
 
 ## 📦 Público vs. privado
 
 | Edición pública | Desarrollo privado |
 | --- | --- |
-| portal público a Render | API FastAPI |
-| documentación de alcance | PostGIS y contratos de datos |
-| arquitectura de alto nivel | análisis parcelario |
-| documentación de procedencia | reglas versionadas y escenarios |
-| experiencia visual | MapLibre + Cesium |
-| sin datos internos | integraciones y tooling de ingesta |
+| acceso a la demo real | frontend operativo |
+| documentación de producto | API FastAPI |
+| arquitectura de alto nivel | PostGIS y contratos |
+| principios de procedencia | análisis parcelario / buildability |
+| roadmap y límites | reglas versionadas, ingesta y tooling |
 
-## 🧩 Stack
-
-**GIS / 3D:** MapLibre GL JS · CesiumJS · GeoJSON · PMTiles  
-**Backend privado:** Python · FastAPI  
-**Datos:** PostgreSQL/PostGIS · OGC/INSPIRE · servicios públicos  
-**Frontend público:** HTML · CSS · JavaScript  
-**Principios:** provenance-first · mobile/responsive · accesibilidad · PWA
-
-## 📌 Estado
-
-**Portfolio / Showcase Edition.** El desarrollo principal continúa en privado y evoluciona como prototipo técnico, no como sistema municipal oficial.
+El showcase no es un espejo del repositorio privado.
 
 ## 🔏 Uso y reutilización
 
-Este repositorio público funciona como showcase técnico. **No concede actualmente una licencia open source de reutilización del código**.
-
-Las fuentes cartográficas y los datos de terceros mantienen sus propias licencias y condiciones.
+Este repositorio funciona como showcase técnico. **No concede actualmente una licencia open source de reutilización del código.** Las fuentes cartográficas y datos de terceros mantienen sus propias licencias y condiciones.
 
 ---
 
