@@ -14,7 +14,7 @@ Showcase público de un prototipo privado de análisis territorial, proyecto par
 
 [**Abrir SIG en Render**](https://sig-castelldefels-twin.onrender.com/) · [**Arquitectura**](docs/ARCHITECTURE.md) · [**Alcance público**](SHOWCASE_SCOPE.md)
 
-**by [Federico Trucco](https://github.com/truinio)** · [LinkedIn](https://www.linkedin.com/in/federico-trucco/)
+**by [Federico Trucco](https://github.com/truquinio)** · [LinkedIn](https://www.linkedin.com/in/federico-trucco/)
 
 </div>
 
@@ -147,4 +147,4 @@ Este repositorio funciona como showcase técnico. **No concede actualmente una l
 ---
 
 © 2026 Federico Trucco. All rights reserved.  
-**by [truquinio](https://github.com/truinio)** · [LinkedIn](https://www.linkedin.com/in/federico-trucco/)
+**by [truquinio](https://github.com/truquinio)** · [LinkedIn](https://www.linkedin.com/in/federico-trucco/)
