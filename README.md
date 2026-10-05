@@ -12,7 +12,7 @@ Showcase público de un prototipo privado orientado a análisis territorial, tra
 ![PostGIS](https://img.shields.io/badge/PostGIS-Spatial-4169E1?style=flat-square)
 [![Pages](https://github.com/truquinio/sig-castelldefels-pro-portfolio/actions/workflows/pages.yml/badge.svg)](https://github.com/truquinio/sig-castelldefels-pro-portfolio/actions/workflows/pages.yml)
 
-[**Abrir showcase**](https://truquinio.github.io/sig-castelldefels-pro-portfolio/) ·
+[**Abrir SIG en Render**](https://sig-castelldefels-twin.onrender.com/) ·
 [**Arquitectura**](docs/ARCHITECTURE.md) ·
 [**Alcance público**](SHOWCASE_SCOPE.md)
 
@@ -31,7 +31,7 @@ El flujo de trabajo del desarrollo privado se organiza alrededor de:
 
 > **localizar → consultar → contrastar fuentes → analizar → simular → explicar evidencia**
 
-La demo de este repositorio es deliberadamente más pequeña: permite evaluar el lenguaje cartográfico y la dirección de producto sin fingir que el backend privado está ejecutándose en GitHub Pages.
+La página pública dirige al SIG desplegado en Render. Este repositorio sólo documenta su alcance y arquitectura; el núcleo de código permanece privado.
 
 ## 🧭 Tres superficies del producto
 
@@ -57,19 +57,11 @@ La demo de este repositorio es deliberadamente más pequeña: permite evaluar el
 > [!NOTE]
 > La disponibilidad de una fuente externa no implica que todos sus datos sean “live”. El proyecto distingue observación, estimación, escenario y simulación en lugar de presentarlos como equivalentes.
 
-## ▶️ Showcase público
+## ▶️ Abrir el SIG
 
-[**Abrir demo**](https://truquinio.github.io/sig-castelldefels-pro-portfolio/)
+[**SIG Castelldefels · Digital Twin en Render**](https://sig-castelldefels-twin.onrender.com/)
 
-La edición pública usa HTML, CSS, JavaScript y MapLibre con geometrías de demostración. No necesita el backend privado.
-
-Para servirla localmente:
-
-~~~bash
-python -m http.server 8000
-~~~
-
-Abre `http://localhost:8000/`.
+La portada de GitHub Pages redirige allí. La interfaz y los servicios pueden tardar en responder durante el arranque del plan gratuito; la propia aplicación muestra su estado. Este repositorio conserva la documentación pública sin replicar el código privado.
 
 ## 🏗️ Arquitectura
 
@@ -106,8 +98,8 @@ Una visualización 3D o un escenario **no sustituyen** una licencia, un certific
 
 | Edición pública | Desarrollo privado |
 | --- | --- |
-| showcase MapLibre | API FastAPI |
-| geometrías de demostración | PostGIS y contratos de datos |
+| portal público a Render | API FastAPI |
+| documentación de alcance | PostGIS y contratos de datos |
 | arquitectura de alto nivel | análisis parcelario |
 | documentación de procedencia | reglas versionadas y escenarios |
 | experiencia visual | MapLibre + Cesium |
