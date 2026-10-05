@@ -1,4 +1,4 @@
-name: Deploy portfolio demo
+name: Deploy SIG portal
 
 on:
   push:

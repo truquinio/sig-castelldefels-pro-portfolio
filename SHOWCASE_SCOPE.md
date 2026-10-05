@@ -1,26 +1,18 @@
 # Alcance de la edición pública
 
-Esta versión existe para **mostrar el proyecto sin publicar el núcleo comercial completo**.
+Este repositorio es el **escaparate controlado** de SIG Castelldefels · Digital Twin. La portada de GitHub Pages dirige al [SIG desplegado en Render](https://sig-castelldefels-twin.onrender.com/); no contiene una segunda aplicación cartográfica.
 
 ## Incluido
 
-- demo cartográfica simplificada;
-- geometrías ficticias de ejemplo;
-- documentación de arquitectura de alto nivel;
-- descripción de tecnologías y fuentes;
-- experiencia visual representativa.
+- portada de acceso al SIG real y enlaces a Federico Trucco;
+- descripción del producto, sus límites y sus fuentes;
+- arquitectura conceptual de alto nivel.
 
 ## Excluido
 
-- app original completa;
-- backend/proxy;
-- agentes;
-- integración con Ollama;
-- scripts de Catastro y Overture;
-- reglas normativas;
-- motor de análisis;
-- datasets de trabajo;
-- automatizaciones internas;
-- historial del repositorio privado.
+- código del frontend y backend del SIG operativo;
+- agentes, integración con Ollama y automatizaciones internas;
+- scripts de Catastro y Overture, reglas normativas y motor de análisis;
+- datasets de trabajo e historial del repositorio privado.
 
-La edición pública se creó como repositorio nuevo, por lo que no hereda el historial Git del proyecto completo.
+El SIG es un prototipo independiente y no un servicio oficial del Ayuntamiento de Castelldefels. La disponibilidad de datos externos y del backend en Render puede variar. El repositorio público se creó por separado y no hereda el historial Git privado.
